@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="
+	    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/mongo http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+
+	
+	<mongo:mongo-client host="${mongo.host}" port="${mongo.port}" id="mongoClient" 
+		credentials="${mongo.user}:${mongo.pwd}@${mongo.dbAuth}">
+		<mongo:client-options
+			connections-per-host="${mongo.connectionsPerHost}"
+			threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
+			connect-timeout="${mongo.connectTimeout}" 
+			max-wait-time="${mongo.maxWaitTime}"
+			socket-keep-alive="${mongo.socketKeepAlive}"
+			socket-timeout="${mongo.socketTimeout}"
+			max-connection-idle-time="${mongo.idleTimeout}"
+			min-connections-per-host="${mongo.minConnectionsPerHost}"/>
+	</mongo:mongo-client>
+	
+	<mongo:db-factory id="mongoDbFactory" mongo-ref="mongoClient" dbname="${mongo.dbName}"/>
+
+	<mongo:template id="mongoTemplate" db-factory-ref="mongoDbFactory"/>
+
+</beans>
