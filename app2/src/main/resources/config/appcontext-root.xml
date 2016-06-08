@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<context:property-placeholder location="classpath:/config/app.properties"/>
+	
+	<beans:import resource="/appcontext-datasource.xml"/>
+	<beans:import resource="/appcontext-security.xml"/>
+	
+	<!-- create springSessionRepositoryFilter for web.xml -->
+	<context:component-scan base-package="org.springframework.session.config.annotation.web.http" />
+	
+	<!-- create bean mongoOperationsSessionRepository -->
+	<beans:bean class="org.springframework.session.data.mongo.config.annotation.web.http.MongoHttpSessionConfiguration">
+		<beans:property name="maxInactiveIntervalInSeconds" value="1800" />
+		<beans:property name="cookieSerializer">
+			<beans:bean class="org.springframework.session.web.http.DefaultCookieSerializer">
+				<beans:property name="domainName" value="localhost"/>
+				<beans:property name="cookiePath" value="/"/>
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+	
+</beans:beans>
