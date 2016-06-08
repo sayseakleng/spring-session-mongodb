@@ -19,6 +19,12 @@
 	<!-- create bean mongoOperationsSessionRepository -->
 	<beans:bean class="org.springframework.session.data.mongo.config.annotation.web.http.MongoHttpSessionConfiguration">
 		<beans:property name="maxInactiveIntervalInSeconds" value="1800" />
+		<beans:property name="cookieSerializer">
+			<beans:bean class="org.springframework.session.web.http.DefaultCookieSerializer">
+				<beans:property name="domainName" value="localhost"/>
+				<beans:property name="cookiePath" value="/"/>
+			</beans:bean>
+		</beans:property>
 	</beans:bean>
 	
 </beans:beans>
