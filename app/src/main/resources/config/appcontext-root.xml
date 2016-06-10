@@ -23,6 +23,7 @@
 			<beans:bean class="org.springframework.session.web.http.DefaultCookieSerializer">
 				<beans:property name="domainName" value="localhost"/>
 				<beans:property name="cookiePath" value="/"/>
+				<beans:property name="cookieName" value="shared_session"/>
 			</beans:bean>
 		</beans:property>
 	</beans:bean>
