@@ -10,18 +10,18 @@
 </head>
 <body>
 	
-<form name='f' action="<c:url value='login' />"
+<form name='f' action="<c:url value='/login' />"
 		method='POST'>
 
 		<table>
 			<tr>
 				<td>User:</td>
-				<td><input type='text' name='j_username' value=''>
+				<td><input type='text' name='j_username' value="user">
 				</td>
 			</tr>
 			<tr>
 				<td>Password:</td>
-				<td><input type='password' name='j_password' />
+				<td><input type='password' name='j_password' value="123"/>
 				</td>
 			</tr>
 			<tr>
